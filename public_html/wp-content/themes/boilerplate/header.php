@@ -14,5 +14,5 @@
 </head>
 <body>
 <?php global $UI_DEBUG; if (!$UI_DEBUG): ?>
-
+  <? get_component('menu') ?>
 <?php endif; ?>

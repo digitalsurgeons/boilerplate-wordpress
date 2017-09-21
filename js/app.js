@@ -6,5 +6,5 @@ import './polyfills'
 // ==========================================================================
 // Components
 // ==========================================================================
-import '../components/header'
-import '../components/menu'
+import '../public_html/components/header'
+import '../public_html/components/menu'

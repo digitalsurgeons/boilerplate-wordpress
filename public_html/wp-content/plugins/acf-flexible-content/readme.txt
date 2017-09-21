@@ -1,7 +1,7 @@
 === Advanced Custom Fields: Flexible Content Field ===
 Contributors: elliotcondon
 Requires at least: 3.6.0
-Tested up to: 4.8.0
+Tested up to: 4.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,7 +41,10 @@ include_once('acf-flexible-content/acf-flexible-content.php');
 
 == Changelog ==
 
-= 2.0.0-beta1 =
+= 2.0.1 =
+* Minor fixes and improvements
+
+= 2.0.0 =
 * Added support for ACF version 5
 
 = 1.1.1 =

@@ -9,7 +9,6 @@ if (function_exists('acf_add_options_page')) {
 // render components based on file name matching from flexible content plugin
 function get_components() {
   global $UI_DEBUG;
-
   if(have_rows('components')):
     while (have_rows('components')) : the_row();
       $layout = get_row_layout();
