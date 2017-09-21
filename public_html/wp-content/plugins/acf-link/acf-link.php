@@ -4,7 +4,7 @@
  * Description: Allows you to choose a link to an existing piece of content, or enter your own
  * Author:      Corey Worrell, EMRL
  * Author URI:  http://emrl.com
- * Version:     1.1.6
+ * Version:     1.1.7
  */
 add_action('acf/include_field_types', function ($version) {
     include 'src/FieldLink.php';
@@ -18,3 +18,7 @@ add_action('admin_init', function () {
         class_alias('Emrl\Acflink\Support\AdminColumns\FieldLink', 'ACA_ACF_Field_Link');
     }
 });
+
+// Deprecation notice
+include 'src/Deprecation.php';
+new Emrl\AcfLink\Deprecation;

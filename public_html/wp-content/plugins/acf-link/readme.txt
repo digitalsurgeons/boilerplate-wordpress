@@ -3,13 +3,15 @@ Contributors: coreyw
 Tags: acf, advanced custom fields, link, chooser, selector, picker
 Requires at least: 3.5.0
 Tested up to: 4.8
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Integrates WordPress' default link picker into Advanced Custom Fields
 
 == Description ==
+
+## As of ACF Pro 5.6.0, this field is built-in, so this plugin should not be used.
 
 Allows you to select an existing piece of content or enter a custom URL, set the link title, and choose whether or not the link should open in a new window/tab.
 
@@ -39,6 +41,10 @@ After saving, you can access your data as an array:
 3. Field when a link has been selected
 
 == Changelog ==
+
+= 1.1.7 =
+2017-08-02
+* Deprecation notice for ACF Pro 5.6.0
 
 = 1.1.6 =
 2017-05-23
