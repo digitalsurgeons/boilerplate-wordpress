@@ -2,7 +2,6 @@
   "extends": "stylelint-config-recommended",
   "plugins": [
     "stylelint-selector-bem-pattern",
-    "stylelint-scss",
     "stylelint-order"
   ],
   "rules": {
