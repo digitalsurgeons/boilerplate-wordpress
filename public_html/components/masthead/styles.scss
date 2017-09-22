@@ -6,12 +6,6 @@
   text-align: center;
 }
 
-.masthead--fullscreen {
-  @media (min-width: $medium-screen) {
-    height: 100vh;
-  }
-}
-
 .masthead__container {
   @include m-outer-container();
   height: auto;
@@ -60,7 +54,7 @@
 }
 
 .masthead__lampshade {
-  background-color: rgba(70, 83, 97, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   height: 100%;
   left: 0;
   position: absolute;
@@ -82,8 +76,7 @@
 }
 
 .masthead__heading {
-  color: $black;
-  font-family: $heading-font-family;
+  color: $white;
   font-size: 20px;
   font-weight: 400;
   line-height: 32px;
@@ -92,13 +85,5 @@
     font-size: 20px;
     font-weight: 400;
     line-height: 32px;
-  }
-}
-
-.masthead__button {
-  margin-top: 20px;
-
-  @media (min-width: $medium-screen) {
-    margin-top: 50px;
   }
 }

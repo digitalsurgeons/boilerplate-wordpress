@@ -24,7 +24,7 @@
  */
 switch ($hostname) {
     case 'boilerplate-wordpress.ads.dsdev':
-        define('WP_ENV', 'development');
+        define('WP_ENV', 'ads');
         break;
 
     case 'staging.domain.com':

@@ -4,7 +4,7 @@
 
 <?php
 // render bugherd if dev environment
-if (ENV !== 'prod'):
+if (WP_ENV !== 'prod'):
 ?>
 <script type='text/javascript'>
 (function (d, t) {
