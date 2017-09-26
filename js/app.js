@@ -8,3 +8,7 @@ import './polyfills'
 // ==========================================================================
 import '../public_html/components/header'
 import '../public_html/components/menu'
+
+function foo() {
+  return true
+}
