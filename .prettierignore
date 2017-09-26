@@ -1,0 +1,14 @@
+public_html/wp-content/**/*.js
+public_html/wp-content/**/*.scss
+public_html/wp-content/**/*.json
+public_html/wp-content/**/*.css
+
+public_html/wp-includes/**/*.js
+public_html/wp-includes/**/*.scss
+public_html/wp-includes/**/*.json
+public_html/wp-includes/**/*.css
+
+public_html/wp-admin/**/*.js
+public_html/wp-admin/**/*.scss
+public_html/wp-admin/**/*.json
+public_html/wp-admin/**/*.css
