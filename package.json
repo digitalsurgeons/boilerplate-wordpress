@@ -8,7 +8,6 @@
     "webpack:prod":
       "NODE_ENV=production webpack --config ./webpack.config.prod.js --colors",
     "start": "npm run webpack:prod",
-    "predev": "npm run webpack:dev",
     "dev": "npm run webpack:dev",
     "precommit": "lint-staged"
   },
