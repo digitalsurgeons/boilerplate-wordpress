@@ -27,6 +27,10 @@ switch ($hostname) {
         define('WP_ENV', 'ads');
         break;
 
+    case 'boilerplate-wordpress.cz.dev':
+        define('WP_ENV', 'cz');
+        break;
+
     case 'staging.domain.com':
         define('WP_ENV', 'staging');
         break;
