@@ -2,14 +2,14 @@ import $ from 'jquery'
 import Headroom from 'headroom.js'
 
 class Header {
-  constructor (element, options) {
+  constructor(element, options) {
     this.element = $(element)
     this.hamburger = $(options.hamburger)
     this.menu = $(options.menu)
     this.body = $(options.body)
   }
 
-  init () {
+  init() {
     if (!this.element.length) {
       return
     }
@@ -17,7 +17,7 @@ class Header {
     this.onClickHamburger()
   }
 
-  initHeadroom () {
+  initHeadroom() {
     const headroom = new Headroom(this.element[0], {
       classes: {
         // when element is initialised
@@ -44,7 +44,7 @@ class Header {
     headroom.init()
   }
 
-  onClickHamburger () {
+  onClickHamburger() {
     this.hamburger.on('click', () => {
       this.menu.addClass('isActive')
       this.body.css('overflow', 'hidden')
