@@ -23,17 +23,14 @@
  *
  */
 switch ($hostname) {
-    case 'boilerplate-wordpress.ads.dsdev':
-        define('WP_ENV', 'ads');
-        break;
-
-    case 'boilerplate-wordpress.cz.dev':
-        define('WP_ENV', 'cz');
+    case 'boilerplate.ds.dsdev':
+        define('WP_ENV', 'ds');
         break;
 
     case 'staging.domain.com':
         define('WP_ENV', 'staging');
         break;
+
     case 'www.domain.com':
     default:
         define('WP_ENV', 'production');

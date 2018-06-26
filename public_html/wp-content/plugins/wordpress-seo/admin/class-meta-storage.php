@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Admin\Links
  */
 
@@ -13,21 +15,20 @@ class WPSEO_Meta_Storage implements WPSEO_Installable {
 	/** @var WPSEO_Database_Proxy */
 	protected $database_proxy;
 
-	/** @var null|string */
+	/** @var null|string Deprecated. */
 	protected $table_prefix;
 
 	/**
-	 * Sets the table prefix.
+	 * Initializes the database table.
 	 *
-	 * @param string $table_prefix Optional. The prefix to use for the table.
+	 * @param string $table_prefix Optional. Deprecated argument.
 	 */
 	public function __construct( $table_prefix = null ) {
-		if ( null === $table_prefix ) {
-			$table_prefix = $GLOBALS['wpdb']->get_blog_prefix();
+		if ( $table_prefix !== null ) {
+			_deprecated_argument( __METHOD__, 'WPSEO 7.4' );
 		}
 
-		$this->table_prefix   = $table_prefix;
-		$this->database_proxy = new WPSEO_Database_Proxy( $GLOBALS['wpdb'], $this->get_table_name(), true );
+		$this->database_proxy = new WPSEO_Database_Proxy( $GLOBALS['wpdb'], self::TABLE_NAME, true );
 	}
 
 	/**
@@ -36,7 +37,7 @@ class WPSEO_Meta_Storage implements WPSEO_Installable {
 	 * @return string The table name.
 	 */
 	public function get_table_name() {
-		return $this->table_prefix . self::TABLE_NAME;
+		return $this->database_proxy->get_table_name();
 	}
 
 	/**
@@ -95,8 +96,15 @@ class WPSEO_Meta_Storage implements WPSEO_Installable {
 
 		$results = $wpdb->get_results( $query );
 
+		$post_ids_non_zero = array();
 		foreach ( $results as $result ) {
 			$this->save_meta_data( $result->post_id, array( 'incoming_link_count' => $result->incoming ) );
+			$post_ids_non_zero[] = $result->post_id;
+		}
+
+		$post_ids_zero = array_diff( $post_ids, $post_ids_non_zero );
+		foreach ( $post_ids_zero as $post_id ) {
+			$this->save_meta_data( $post_id, array( 'incoming_link_count' => 0 ) );
 		}
 	}
 }

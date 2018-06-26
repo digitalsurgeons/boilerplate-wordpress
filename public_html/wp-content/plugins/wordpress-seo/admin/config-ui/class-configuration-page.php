@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Admin
  */
 
@@ -55,7 +57,7 @@ class WPSEO_Configuration_Page {
 	}
 
 	/**
-	 * Renders the wizard page and exits to prevent the wordpress UI from loading.
+	 * Renders the wizard page and exits to prevent the WordPress UI from loading.
 	 */
 	public function render_wizard_page() {
 		$this->show_wizard();
@@ -67,6 +69,10 @@ class WPSEO_Configuration_Page {
 	 */
 	public function enqueue_assets() {
 		wp_enqueue_media();
+
+		if ( ! wp_script_is( 'wp-element', 'registered' ) && function_exists( 'gutenberg_register_scripts_and_styles' ) ) {
+			gutenberg_register_scripts_and_styles();
+		}
 
 		/*
 		 * Print the `forms.css` WP stylesheet before any Yoast style, this way
@@ -81,6 +87,9 @@ class WPSEO_Configuration_Page {
 		$config = $this->get_config();
 
 		wp_localize_script( WPSEO_Admin_Asset_Manager::PREFIX . 'configuration-wizard', 'yoastWizardConfig', $config );
+
+		$yoast_components_l10n = new WPSEO_Admin_Asset_Yoast_Components_l10n();
+		$yoast_components_l10n->localize_script( WPSEO_Admin_Asset_Manager::PREFIX . 'configuration-wizard' );
 	}
 
 	/**
@@ -103,7 +112,7 @@ class WPSEO_Configuration_Page {
 			<title><?php
 				printf(
 					/* translators: %s expands to Yoast SEO. */
-					__( '%s &rsaquo; Configuration Wizard', 'wordpress-seo' ),
+					esc_html__( '%s &rsaquo; Configuration Wizard', 'wordpress-seo' ),
 					'Yoast SEO' );
 			?></title>
 			<?php
@@ -123,14 +132,10 @@ class WPSEO_Configuration_Page {
 		<body class="wp-admin wp-core-ui">
 		<div id="wizard"></div>
 		<div role="contentinfo" class="yoast-wizard-return-link-container">
-			<a class="button yoast-wizard-return-link" href="<?php echo $dashboard_url ?>">
+			<a class="button yoast-wizard-return-link" href="<?php echo esc_url( $dashboard_url ); ?>">
 				<span aria-hidden="true" class="dashicons dashicons-no"></span>
 				<?php
-				printf(
-					/* translators: %s expands to Yoast SEO. */
-					__( 'Close wizard', 'wordpress-seo' ),
-					'Yoast SEO'
-				);
+				esc_html_e( 'Close wizard', 'wordpress-seo' );
 				?>
 			</a>
 		</div>
@@ -161,8 +166,8 @@ class WPSEO_Configuration_Page {
 	 * @return array The API endpoint config.
 	 */
 	public function get_config() {
-		$service      = new WPSEO_GSC_Service();
-		$config       = array(
+		$service = new WPSEO_GSC_Service();
+		$config  = array(
 			'namespace'         => WPSEO_Configuration_Endpoint::REST_NAMESPACE,
 			'endpoint_retrieve' => WPSEO_Configuration_Endpoint::ENDPOINT_RETRIEVE,
 			'endpoint_store'    => WPSEO_Configuration_Endpoint::ENDPOINT_STORE,
@@ -224,7 +229,7 @@ class WPSEO_Configuration_Page {
 	 * @return Yoast_Notification
 	 */
 	private static function get_notification() {
-		$message = __( 'The configuration wizard helps you to easily configure your site to have the optimal SEO settings.', 'wordpress-seo' );
+		$message  = __( 'The configuration wizard helps you to easily configure your site to have the optimal SEO settings.', 'wordpress-seo' );
 		$message .= '<br/>';
 		$message .= sprintf(
 			/* translators: %1$s resolves to Yoast SEO, %2$s resolves to the starting tag of the link to the wizard, %3$s resolves to the closing link tag */
@@ -253,28 +258,14 @@ class WPSEO_Configuration_Page {
 	 * @return bool
 	 */
 	private function should_add_notification() {
-		$options = $this->get_options();
-
-		return $options['show_onboarding_notice'] === true;
+		return ( WPSEO_Options::get( 'show_onboarding_notice' ) === true );
 	}
 
 	/**
 	 * Remove the options that triggers the notice for the configuration wizard.
 	 */
 	private function remove_notification_option() {
-		$options = $this->get_options();
-
-		$options['show_onboarding_notice'] = false;
-
-		update_option( 'wpseo', $options );
+		WPSEO_Options::set( 'show_onboarding_notice', false );
 	}
 
-	/**
-	 * Returns the set options
-	 *
-	 * @return mixed|void
-	 */
-	private function get_options() {
-		return get_option( 'wpseo' );
-	}
 }

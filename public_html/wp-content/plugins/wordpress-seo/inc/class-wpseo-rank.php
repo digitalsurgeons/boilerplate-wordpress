@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Internals
  */
 
@@ -35,7 +37,7 @@ class WPSEO_Rank {
 			'start' => 0,
 			'end'   => 0,
 		),
-		self::BAD  => array(
+		self::BAD => array(
 			'start' => 1,
 			'end'   => 40,
 		),
@@ -58,7 +60,7 @@ class WPSEO_Rank {
 	 * @param int $rank The actual rank.
 	 */
 	public function __construct( $rank ) {
-		if ( ! in_array( $rank, self::$ranks ) ) {
+		if ( ! in_array( $rank, self::$ranks, true ) ) {
 			$rank = self::BAD;
 		}
 

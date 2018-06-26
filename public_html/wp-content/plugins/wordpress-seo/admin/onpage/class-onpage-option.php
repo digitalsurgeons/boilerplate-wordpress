@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Admin
  */
 
@@ -98,9 +100,7 @@ class WPSEO_OnPage_Option {
 	 * @return bool
 	 */
 	public function is_enabled() {
-		$options = get_option( 'wpseo' );
-
-		return ! empty( $options['onpage_indexability'] );
+		return WPSEO_Options::get( 'onpage_indexability' );
 	}
 
 	/**
@@ -109,20 +109,11 @@ class WPSEO_OnPage_Option {
 	 * @return array
 	 */
 	private function get_option() {
-		return get_option( self::OPTION_NAME, array( self::STATUS => self::NOT_FETCHED, self::LAST_FETCH => 0 ) );
-	}
+		$default = array(
+			self::STATUS     => self::NOT_FETCHED,
+			self::LAST_FETCH => 0,
+		);
 
-	/**
-	 * @deprecated 3.0.2
-	 * @codeCoverageIgnore
-	 *
-	 * Returns the indexable status of the website.
-	 *
-	 * @return bool
-	 */
-	public function is_indexable() {
-		_deprecated_function( __METHOD__, 'WPSEO 3.0.2' );
-
-		return self::IS_INDEXABLE === $this->get_status();
+		return get_option( self::OPTION_NAME, $default );
 	}
 }

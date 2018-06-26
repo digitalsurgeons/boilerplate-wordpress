@@ -3,13 +3,14 @@ const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CompilerPlugin = require('compiler-webpack-plugin')
 const path = require('path')
+const glob = require('glob')
 const child_process = require('child_process')
 const config = require('./config')
 const vendor = require('./js/vendor')
 
 module.exports = {
   entry: {
-    bundle: './js/app.js',
+    bundle: glob.sync('./components/**/index.js'),
     style: './scss/app.scss',
     svgxuse: './node_modules/svgxuse/svgxuse.js',
     vendor: vendor
